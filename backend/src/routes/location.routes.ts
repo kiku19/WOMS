@@ -1,10 +1,10 @@
 import { Router, Request, Response } from "express";
-import { Location } from "../models/Location.ts";
-import { Entity } from "../models/Entity.ts";
+import { Location } from "../models/Location.js";
+import { Entity } from "../models/Entity.js";
 import mongoose, { Types } from "mongoose";
-import WorkOrderLocation from "../models/WorkOrderLocations.ts";
-import Bills from "../models/Bills.ts";
-import BillNo from "../models/BillNo.ts";
+import WorkOrderLocation from "../models/WorkOrderLocations.js";
+import Bills from "../models/Bills.js";
+import BillNo from "../models/BillNo.js";
 
 const router = Router();
 

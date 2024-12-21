@@ -1,9 +1,9 @@
 import express, { NextFunction, Request, Response } from "express";
-import contractorRoutes from "./routes/contractor.routes.ts";
-import entityRoutes from "./routes/entity.routes.ts";
-import locationRoutes from "./routes/location.routes.ts";
-import workOrderRoutes from "./routes/workOrder.routes.ts";
-import billRoutes from "./routes/bill.routes.ts";
+import contractorRoutes from "./routes/contractor.routes.js";
+import entityRoutes from "./routes/entity.routes.js";
+import locationRoutes from "./routes/location.routes.js";
+import workOrderRoutes from "./routes/workOrder.routes.js";
+import billRoutes from "./routes/bill.routes.js";
 import jwt from "jsonwebtoken";
 import mongoose, { Types } from "mongoose";
 import cors from "cors";

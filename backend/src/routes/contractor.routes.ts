@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
-import { Contractor } from "../models/Contractor.ts";
+import { Contractor } from "../models/Contractor.js";
 import mongoose, { Types } from "mongoose";
-import WorkOrderLocation from "../models/WorkOrderLocations.ts";
+import WorkOrderLocation from "../models/WorkOrderLocations.js";
 
 const router = Router();
 

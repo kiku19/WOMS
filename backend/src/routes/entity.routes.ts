@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { Entity } from "../models/Entity.ts";
+import { Entity } from "../models/Entity.js";
 import mongoose, { Types } from "mongoose";
 
 const router = Router();

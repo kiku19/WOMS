@@ -6,8 +6,8 @@
     "sourceMap": true,
     "strict": true,
     "outDir": "dist",
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
+    // "allowImportingTsExtensions": true,
+    // "noEmit": true,
   },
   "include": ["src/types/**/*","src/**/*"]
 }
