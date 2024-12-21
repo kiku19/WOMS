@@ -1,0 +1,46 @@
+<div class="grid grid-cols-6 gap-4 items-center bg-gray-50 px-4 py-2 rounded-md shadow-sm border border-gray-200 my-1"
+  [ngClass]="{'pointer-events-none': saving}">
+  <!-- Location Name -->
+  <div>
+    <span class="text-gray-800 font-xs">{{ location.location }}</span>
+  </div>
+
+  <!-- Linked Entity -->
+  <div>
+    <span class="text-gray-800 font-xs">{{ location.entity }}</span>
+  </div>
+
+  <!-- Rate Input -->
+  <div>
+    <mat-form-field class="w-full">
+      <mat-label>Rate</mat-label>
+      <input [min]="0" [disabled]="location.saved" matInput type="number" [(ngModel)]="location.rate" />
+    </mat-form-field>
+  </div>
+
+  <!-- Quantity Input -->
+  <div>
+    <mat-form-field class="w-full">
+      <mat-label>Quantity</mat-label>
+      <input [disabled]="location.saved" [min]="0" matInput type="number" [(ngModel)]="location.quantity" />
+    </mat-form-field>
+  </div>
+
+  <!-- Button -->
+  <div class="flex justify-end">
+    @if(!location.saved){
+    <button mat-icon-button (click)="save()" class="bg-green-100 hover:bg-green-200 text-green-600">
+      <mat-icon>done</mat-icon>
+    </button>
+    }
+  </div>
+
+  <!-- Button -->
+  <div class="flex justify-end">
+    @if(!location.saved){
+    <button mat-icon-button (click)="delete()" class="bg-red-100 hover:bg-red-200 text-red-600">
+      <mat-icon>remove_circle</mat-icon>
+    </button>
+    }
+  </div>
+</div>

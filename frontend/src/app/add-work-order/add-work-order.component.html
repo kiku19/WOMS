@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>New Work Order</h2>
+<mat-dialog-content>
+    <div class="flex flex-col justify-around" [formGroup]="workOrder">
+
+        <div>
+            <mat-form-field class="w-full">
+                <mat-label>Contractor</mat-label>
+                <input type="text" matInput formControlName="contractor" [matAutocomplete]="auto"
+                    placeholder="Select a contractor from the dropdown">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                    @if(!searchingContractor){
+                    @for (option of contractors; track option) {
+                    <mat-option [value]="option">{{option.name}}</mat-option>
+                    }
+                    }
+
+                    @if(searchingContractor){
+                    <mat-option disabled>searching....</mat-option>
+                    }
+
+                    @if(!contractors.length && !searchingContractor){
+                    <mat-option disabled>No results found.</mat-option>
+                    }
+                </mat-autocomplete>
+                @if(workOrder.get('contractor')?.hasError('required')){
+                <mat-error>Contractor is required. Select from the Dropdown.</mat-error>
+                }
+            </mat-form-field>
+        </div>
+
+        <div class="flex justify-between">
+            <mat-form-field class="example-full-width">
+                <mat-label>Payment Terms</mat-label>
+                <input [min]="0"  type="number" matInput formControlName="paymentTerms" [errorStateMatcher]="matcher">
+                @if (workOrder.get('paymentTerms')?.hasError('required')) {
+                <mat-error>Payment Terms are required.</mat-error>
+                }
+                @if (workOrder.get('paymentTerms')?.hasError('max')) {
+                <mat-error>Max payment term can be 9999.</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Due Date</mat-label>
+                <input type="date" matInput formControlName="dueDate" [min]="today" [max]="maxDate" [errorStateMatcher]="matcher">
+                @if (workOrder.get('dueDate')?.hasError('required')) {
+                <mat-error>Payment Terms are required.</mat-error>
+                }
+                @if (workOrder.get('dueDate')?.hasError('pastDate')) {
+                <mat-error>Past Dates are not allowed.</mat-error>
+                }
+            </mat-form-field>
+        </div>
+
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button [disabled]="saving" (click)="cancel()">Cancel</button>
+    <button mat-button [disabled]="saving" (click)="save()" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

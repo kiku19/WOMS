@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Select Contractor</h2>
+<mat-dialog-content>
+    <div class="flex flex-col justify-around">
+
+        <div>
+            <mat-form-field class="w-full">
+                <mat-label>Contractor</mat-label>
+                <input type="text" matInput [formControl]="contractor" [matAutocomplete]="auto"
+                    placeholder="Select a contractor from the dropdown">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                    @if(!searchingContractor){
+                    @for (option of contractors; track option) {
+                    <mat-option [value]="option">{{option.name}}</mat-option>
+                    }
+                    }
+
+                    @if(searchingContractor){
+                    <mat-option disabled>searching....</mat-option>
+                    }
+
+                    @if(!contractors.length && !searchingContractor){
+                    <mat-option disabled>No results found.</mat-option>
+                    }
+                </mat-autocomplete>
+                @if(contractor.hasError('required')){
+                <mat-error>Contractor is required. Select from the Dropdown.</mat-error>
+                }
+            </mat-form-field>
+        </div>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button [disabled]="saving" (click)="cancel()">Cancel</button>
+    <button mat-button [disabled]="saving" (click)="save()" cdkFocusInitial>Mark as completed</button>
+</mat-dialog-actions>

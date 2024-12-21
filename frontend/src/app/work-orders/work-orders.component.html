@@ -1,0 +1,56 @@
+@if(loading){
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+@else{
+    <div class="container mx-auto p-4 flex flex-col h-full">
+    
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-xl font-normal">Work Orders</h1>
+            <div class="flex items-center gap-4">
+                <button (click)="openAddWorkOrder()" mat-raised-button color="primary" class="h-10">
+                    New Work Order
+                </button>
+            </div>
+        </div>
+    
+        <div class="overflow-auto mat-elevation-z8 flex-1">
+            @if(dataSource.length){
+            <table mat-table [dataSource]="dataSource">
+
+                <ng-container matColumnDef="contractor">
+                    <th class="!font-semibold" mat-header-cell *matHeaderCellDef> Contractor Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.contractor}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="paymentTerms">
+                    <th class="!font-semibold" mat-header-cell *matHeaderCellDef> Payment Terms </th>
+                    <td mat-cell *matCellDef="let element"> {{element.paymentTerms}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="dueDate">
+                    <th class="!font-semibold" mat-header-cell *matHeaderCellDef> Due Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.dueDate | date:'MM/dd/yyyy'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="addLocation">
+                    <th class="!font-semibold" mat-header-cell *matHeaderCellDef> </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <button mat-stroked-button (click)="openAddLocation(element)"  color="primary" class="!text-xs !p-2">
+                            Add Location
+                        </button>
+                    </td>
+                </ng-container>
+    
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            }
+            @else{
+            <div class="flex justify-center items-center">
+                No Work Orders are added.
+            </div>
+            }
+        </div>
+    
+    </div>
+}

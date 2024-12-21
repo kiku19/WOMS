@@ -1,0 +1,48 @@
+
+    <h2 mat-dialog-title>New Contractor</h2>
+    <mat-dialog-content>
+        <div class="flex flex-col h-[20vh] w-[30rem] justify-around" [formGroup]="contractor">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" name="name" [errorStateMatcher]="matcher" />
+                @if(contractor.get('name')?.hasError('required')){
+                <mat-error>Name is required.</mat-error>
+                }
+                @if(contractor.get('name')?.hasError('maxlength')){
+                <mat-error>
+                    Maximum length is 50 characters.
+                </mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Phone Number</mat-label>
+                <input matInput formControlName="phone" name="phone" type="tel"
+                    [errorStateMatcher]="matcher" />
+                @if(contractor.get('phone')?.hasError('required')){
+                <mat-error>
+                    Phone number is required.
+                </mat-error>
+                }
+                @if(contractor.get('phone')?.hasError('pattern')){
+                <mat-error>
+                    Only numbers are allowed
+                </mat-error>
+                }
+                @if(contractor.get('phone')?.hasError('maxlength') && !contractor.get('phone')?.hasError('pattern')){
+                    <mat-error>
+                        Maximum length is 10 characters.
+                    </mat-error>
+                    }
+                @if(contractor.get('phone')?.hasError('minlength') && !contractor.get('phone')?.hasError('pattern')){
+                    <mat-error>
+                        Minimum length is 10 characters.
+                    </mat-error>
+                    }
+            </mat-form-field>
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button [disabled]="saving" (click)="cancel()">Cancel</button>
+        <button mat-button [disabled]="saving" (click)="save()" cdkFocusInitial>Save</button>
+    </mat-dialog-actions>

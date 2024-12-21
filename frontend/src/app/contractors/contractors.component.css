@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+}
+
+.mat-mdc-row:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.mat-mdc-header-cell {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.mat-mdc-cell {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+table {
+  width: 100%;
+}
