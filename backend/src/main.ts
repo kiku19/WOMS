@@ -55,7 +55,6 @@ app.post("/login", (req, res) => {
     httpOnly: true,
     maxAge: 1000 * 60 * 60,
     sameSite: "none",
-    domain:"https://womsfrontend.netlify.app"
   });
 
   res.status(200).send({ message: "Login successful" });
