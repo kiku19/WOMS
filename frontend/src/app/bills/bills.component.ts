@@ -7,6 +7,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ApiService } from '../api.service';
 import { MatButtonModule } from '@angular/material/button';
 import { DetailedBillComponent } from './detailed-bill/detailed-bill.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface Bill {
   billNo: number;
@@ -14,7 +15,7 @@ export interface Bill {
   billingProcessId: string;
   billedAt: string;
   totalAmount: number;
-  _id:string
+  _id: string;
 }
 
 @Component({
@@ -38,7 +39,8 @@ export class BillsComponent implements OnInit {
   constructor(
     private matDialog: MatDialog,
     private appService: AppService,
-    private api: ApiService
+    private api: ApiService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -58,10 +60,23 @@ export class BillsComponent implements OnInit {
 
   showDetails(element: Bill) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = element._id
-    dialogConfig.width = "40rem"
-    dialogConfig.maxWidth = "40rem"
-    dialogConfig.height = "50rem"
+    dialogConfig.data = element._id;
+    dialogConfig.width = '40rem';
+    dialogConfig.maxWidth = '40rem';
+    dialogConfig.height = '50rem';
     const instance = this.matDialog.open(DetailedBillComponent, dialogConfig);
+  }
+
+  generatingBill: boolean = false;
+  generateBill() {
+    this.generatingBill = true;
+    this.api.generateBill().subscribe((res) => {
+      if (!res) {
+      } else {
+        this.getBills();
+        this.snackBar.open('Bill generated successfully.', 'Dismiss');
+      }
+      this.generatingBill = false;
+    });
   }
 }

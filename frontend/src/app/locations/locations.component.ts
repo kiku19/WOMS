@@ -88,18 +88,4 @@ export class LocationsComponent {
       }
     });
   }
-
-  generatingBill:boolean = false
-  generateBill(){
-    this.generatingBill = true
-    this.api.generateBill().subscribe((res)=>{
-      if(!res){
-        
-      }
-      else {
-        this.snackBar.open('Bill generated successfully.','Dismiss')
-      }
-      this.generatingBill = false
-    })
-  }
 }

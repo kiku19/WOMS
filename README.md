@@ -1,3 +1,6 @@
+# Node version 22 is required
+# Angular version 19 is required
+
 # WOMS
 
 ## Work Order Management System Starter Guide
