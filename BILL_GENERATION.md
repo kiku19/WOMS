@@ -1,5 +1,7 @@
 ## Detailed Workflow for Billing
 
+- api - `POST - bill/` generates bill
+
 1. **Adding Locations to Work Orders**
 
    - A separate document for each location is added to the `workorderlocations` collection with the contractor ID, rate, and quantity.
@@ -31,7 +33,6 @@
 
 5. **Generated Bill Workflow**
 
-   - api - `POST - bill/` generates bill
    - When a bill is generated (i.e., the **Generate Bill** button is clicked in the Bills Tab):
      - All ongoing bill documents are marked as generated bill documents.
        - `bills` collection
