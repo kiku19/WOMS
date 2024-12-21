@@ -1,7 +1,7 @@
 import mongoose, { Schema, Types } from "mongoose";
 
 export interface IBillNo extends Document {
-  sequence: 0;
+  sequence: number;
   userId: Types.ObjectId;
 }
 
@@ -17,5 +17,5 @@ const BillNoSchema = new Schema({
   },
 });
 
-const model = mongoose.model<IBillNo>("BillingCheck", BillNoSchema);
+const model = mongoose.model<IBillNo>("BillNo", BillNoSchema);
 export default model;
