@@ -53,7 +53,7 @@ export class ContractorsComponent implements OnInit {
       )
       .subscribe((res) => {
         if (!res) {
-          this.snackBar.open('Failed to fetch contractors.', 'Dismiss');
+          // this.snackBar.open('Failed to fetch contractors.', 'Dismiss');
         }
         else this.dataSource = res;
         this.loading = false
