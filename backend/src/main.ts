@@ -69,7 +69,7 @@ const authorizationMiddleware = (
   const token = req.cookies.Authorization;
   console.log(token)
   if (!token) {
-    res.status(403).json({ message: "No token provided" });
+    res.status(403).json({ message: "No token provided" ,token});
     return;
   }
 
