@@ -13,5 +13,5 @@ export const routes: Routes = [
   { path: 'work-orders', component: WorkOrdersComponent },
   // { path: 'work-allotment', component: WorkAllotmentComponent },
   { path: 'bills', component: BillsComponent },
-  { path: '/', component: ContractorsComponent }, 
+  { path: '', redirectTo: '/contractors', pathMatch: 'full' }, 
 ];
