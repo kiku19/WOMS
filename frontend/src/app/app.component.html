@@ -1,22 +1,17 @@
-@if(!loading){
-  <div class="h-screen flex flex-col mx-4">
+<div class="h-screen flex flex-col mx-4">
 
-    <!-- <h1>Work Order Management System</h1> -->
-    <!-- <app-kpi></app-kpi> -->
-  
-    <nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="false" mat-align-tabs="start">
-      @for (link of links; track link) {
-      <a mat-tab-link [routerLink]="link.url" (click)="activeLink = link.link" [active]="activeLink == link.link">
-        {{link.link}} </a>
-      } 
-    </nav>
-    <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
-  
-    <div class="tab-content flex-1">
-      <router-outlet></router-outlet>
-    </div>
+  <!-- <h1>Work Order Management System</h1> -->
+  <!-- <app-kpi></app-kpi> -->
+
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="false" mat-align-tabs="start">
+    @for (link of links; track link) {
+    <a mat-tab-link [routerLink]="link.url" (click)="activeLink = link.link" [active]="activeLink == link.link">
+      {{link.link}} </a>
+    }
+  </nav>
+  <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+
+  <div class="tab-content flex-1">
+    <router-outlet></router-outlet>
   </div>
-}
-@else{
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-}
+</div>
