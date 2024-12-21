@@ -23,8 +23,6 @@ declare global {
 const app = express();
 const PORT = process.env.PORT;
 
-console.log(PORT)
-
 if(!process.env.MONGODB_URL)
   throw "MONGODB URL NOT CONFIGURED IN ENV FILE"
 
@@ -97,6 +95,6 @@ app.get("/", async (req: Request, res: Response) => {
   return;
 });
 
-app.listen(parseInt(PORT!), '0.0.0.0', () => {
-  console.log(`Server is listening on http://0.0.0.0:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`LISTENING IN PORT ${PORT}`);
 });
