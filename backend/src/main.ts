@@ -54,7 +54,7 @@ app.post("/login", (req, res) => {
   res.cookie("Authorization", token, {
     httpOnly: true,
     maxAge: 1000 * 60 * 60,
-    sameSite: "strict",
+    sameSite: "none",
     domain:"https://womsfrontend.netlify.app"
   });
 
