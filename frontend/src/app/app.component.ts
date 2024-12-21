@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private snackBar: MatSnackBar,
-    public service:AppService
+    private service:AppService
   ) {}
 
   ngOnInit(): void {
