@@ -23,7 +23,10 @@ declare global {
 const app = express();
 const PORT = process.env.PORT;
 
-await mongoose.connect(`${process.env.MONGODB_URL}`);
+if(!process.env.MONGODB_URL)
+  throw "MONGODB URL NOT CONFIGURED IN ENV FILE"
+
+await mongoose.connect(process.env.MONGODB_URL);
 console.log("connected to db");
 
 

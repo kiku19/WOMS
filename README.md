@@ -4,54 +4,42 @@
 
 ### Frontend Setup
 
-1. Navigate to the frontend directory:
+1. Install dependencies:
    ```bash
-   cd frontend
+   npm --prefix frontend install
    ```
-2. Install dependencies:
+2. Start the frontend server:
    ```bash
-   npm install
-   ```
-3. Start the frontend server:
-   ```bash
-   ng serve
+   npm --prefix frontend/ start
    ```
 
 ### Backend Setup
 
-1. Navigate to the backend directory:
+1. Install dependencies:
    ```bash
-   cd backend
+   npm --prefix backend install
    ```
-2. Install dependencies:
+
+2. Create the local environment file:
    ```bash
-   npm install
-   ```
-3. Create the environment directory:
-   ```bash
-   mkdir backend/env
-   ```
-4. Create the local environment file:
-   ```bash
-   touch backend/env/.env.local
+   mkdir -p backend/env && touch backend/env/.env.local
    ```
 
 #### Backend Environment File Configuration
 
-Add the following variables to `backend/env/.env.local`:
+3. Add the following variables to `backend/env/.env.local`:
 
 ```env
 ENV=LOCAL
-MONGODB_URL=<YOUR_MONGODB_URI>/<YOUR_DB_NAME>
+MONGODB_URL=<YOUR_MONGODB_URI>
 PORT=4000
 JWT_SECRET=<YOUR_SECRET_KEY>
 JWT_EXPIRATION=1h
 ```
 
-Replace `<YOUR_MONGODB_URI>`,`<YOUR_DB_NAME>` and `<YOUR_SECRET_KEY>` with the appropriate values.
+Replace `<YOUR_MONGODB_URI>` and `<YOUR_SECRET_KEY>` with the appropriate values.
 
-5. Start the backend server:
+4. Start the backend server:
    ```bash
-   npm start
+   npm --prefix backend/ start
    ```
-
