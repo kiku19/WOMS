@@ -55,6 +55,7 @@ app.post("/login", (req, res) => {
     httpOnly: true,
     maxAge: 1000 * 60 * 60,
     sameSite: "strict",
+    domain:"https://womsfrontend.netlify.app"
   });
 
   res.status(200).send({ message: "Login successful" });
@@ -67,9 +68,9 @@ const authorizationMiddleware = (
   next: NextFunction
 ) => {
   const token = req.cookies.Authorization;
-  console.log(token)
+
   if (!token) {
-    res.status(403).json({ message: "No token provided" ,token:JSON.stringify(req.cookies)});
+    res.status(403).json({ message: "No token provided" });
     return;
   }
 
