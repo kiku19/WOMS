@@ -33,7 +33,7 @@ console.log("connected to db");
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:4200",
+    origin: "https://womsfrontend.netlify.app/",
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
