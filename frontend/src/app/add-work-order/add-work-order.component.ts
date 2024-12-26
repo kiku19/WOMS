@@ -26,7 +26,7 @@ import { ApiService } from '../api.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { Contractor } from '../contractors/contractors.component';
-import { pastDateValidator } from '../validators/past-date.validator';
+import { futureDateValidator, pastDateValidator } from '../validators/past-date.validator';
 
 @Component({
   selector: 'app-add-work-order',
@@ -64,7 +64,7 @@ export class AddWorkOrderComponent {
       Validators.max(9999),
       Validators.min(1)
     ]),
-    dueDate: new FormControl('', [Validators.required, pastDateValidator()]),
+    dueDate: new FormControl('', [Validators.required, pastDateValidator(),futureDateValidator()]),
   });
 
   matcher = new ErrorStateMatcher();

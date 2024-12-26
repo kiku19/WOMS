@@ -44,10 +44,13 @@
                 <mat-label>Due Date</mat-label>
                 <input type="date" matInput formControlName="dueDate" [min]="today" [max]="maxDate" [errorStateMatcher]="matcher">
                 @if (workOrder.get('dueDate')?.hasError('required')) {
-                <mat-error>Payment Terms are required.</mat-error>
+                <mat-error>Due date is required.</mat-error>
                 }
                 @if (workOrder.get('dueDate')?.hasError('pastDate')) {
                 <mat-error>Past Dates are not allowed.</mat-error>
+                }
+                @if (workOrder.get('dueDate')?.hasError('invalidDate')) {
+                <mat-error>Invalid Date.</mat-error>
                 }
             </mat-form-field>
         </div>
