@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -9,15 +9,16 @@ import {
 import { KpiComponent } from './kpi/kpi.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { catchError, filter, of } from 'rxjs';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { AppService } from './app.service';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [ MatTabsModule, RouterOutlet, RouterModule,MatProgressBarModule],
+  imports: [MatTabsModule, RouterOutlet, RouterModule, MatProgressBarModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -49,36 +50,51 @@ export class AppComponent implements OnInit {
     },
   ];
 
-  loading:boolean = true
+  loading: boolean = true;
 
   constructor(
     private router: Router,
     private http: HttpClient,
     private snackBar: MatSnackBar,
-    private service:AppService
-  ) {}
+    private service: AppService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    if (isPlatformServer(this.platformId)) {
+      console.log('Running on the server');
+    }
+  }
 
   ngOnInit(): void {
-    this.login();
+    if (isPlatformBrowser(this.platformId)) {
+      console.log('Running in the browser');
+      this.login();
+    }
   }
 
   login() {
+    console.log('login');
     this.http
-      .post<{ message: string }>(`${environment.base_url}/login`,{},{withCredentials:true})
-      .pipe(catchError((err)=>{
-        this.snackBar.open('Login Failed','Dismiss')
-        return of({message:null})
-      }))
+      .post<{ message: string }>(
+        `${environment.base_url}/login`,
+        {},
+        { withCredentials: true }
+      )
+      .pipe(
+        catchError((err) => {
+          this.snackBar.open('Login Failed', 'Dismiss');
+          return of({ message: null });
+        })
+      )
       .subscribe((res) => {
-        if(!res.message) return
-        this.snackBar.open('Login Successful','Dismiss')
-        this.loggedIn()
-        this.service.loggedIn.next(true)
-        this.loading = false
-      }); 
+        if (!res.message) return;
+        this.snackBar.open('Login Successful', 'Dismiss');
+        this.loggedIn();
+        this.service.loggedIn.next(true);
+        this.loading = false;
+      });
   }
 
-  loggedIn(){
+  loggedIn() {
     const url = this.router.url.split('/').filter((url) => url.trim())?.[0];
     if (url) {
       const activeLink = this.links.find((link) => link.url == url);
